@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReallyWorld Style</title>
+<title>RAideGrime</title>
 <style>
 /* ================= ОСНОВНІ СТИЛІ ================= */
 * {
@@ -32,10 +32,8 @@ body {
   box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
-.navbar .logo {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #f39c12;
+.navbar .logo img {
+  height: 60px;
 }
 
 .navbar ul {
@@ -78,6 +76,11 @@ body {
   background-color: rgba(0,0,0,0.5);
 }
 
+.hero img {
+  height: 150px;
+  margin-bottom: 20px;
+}
+
 .hero h1 {
   font-size: 4rem;
   color: #fff;
@@ -105,6 +108,8 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .button:hover {
@@ -182,56 +187,81 @@ body {
     width: 90%;
   }
 }
-
 </style>
 </head>
 <body>
 
 <!-- ================= НАВІГАЦІЯ ================= -->
 <nav class="navbar">
-  <div class="logo">ReallyWorld</div>
+  <div class="logo">
+    <img src="/mnt/data/00d11e06-9cd2-40cb-b523-fea8b42f284a.png" alt="RAideGrime Logo">
+  </div>
   <ul>
-    <li><a href="#">Огляд серверу</a></li>
-    <li><a href="#">IP</a></li>
-    <li><a href="#">Донат</a></li>
-    <li><a href="#">Магазин</a></li>
-    <li><a href="#">Форум</a></li>
+    <li><a href="#play">Огляд серверу</a></li>
+    <li><a href="#ip">IP</a></li>
+    <li><a href="#donate">Донат</a></li>
+    <li><a href="#shop">Магазин</a></li>
+    <li><a href="#forum">Форум</a></li>
   </ul>
 </nav>
 
 <!-- ================= ГОЛОВНИЙ БАНЕР ================= -->
 <section class="hero">
-  <h1>Ласкаво просимо в ReallyWorld</h1>
+  <img src="/mnt/data/00d11e06-9cd2-40cb-b523-fea8b42f284a.png" alt="RAideGrime Logo">
+  <h1>Ласкаво просимо в RAideGrime</h1>
   <p>Найкрутіший сервер для геймерів з донатом, магазинами та унікальними функціями!</p>
   <div>
-    <button class="button">Почати гру</button>
-    <button class="button">Детальніше</button>
+    <a href="#play" class="button">Почати гру</a>
+    <a href="#details" class="button">Детальніше</a>
   </div>
 </section>
 
-<!-- ================= СЕКЦІЯ ПРО СЕРВЕР ================= -->
-<section class="section">
+<!-- ================= СЕКЦІЇ ================= -->
+<section id="play" class="section">
   <div class="card">
-    <h3>Сервер</h3>
-    <p>Наш сервер підтримує великі геймерські події, PvP та квести для всіх гравців.</p>
+    <h3>Почати гру</h3>
+    <p>Тут можна підключитися до сервера та почати грати.</p>
   </div>
+</section>
+
+<section id="details" class="section">
+  <div class="card">
+    <h3>Детальніше</h3>
+    <p>Тут можна дізнатися більше про сервер, IP, донат та магазин.</p>
+  </div>
+</section>
+
+<section id="ip" class="section">
   <div class="card">
     <h3>IP Сервера</h3>
-    <p>Підключайтесь до нашого серверу за IP: play.reallyworld.me і насолоджуйтесь грою!</p>
+    <p>Підключайтесь до нашого серверу за IP: play.raidegrime.me</p>
   </div>
+</section>
+
+<section id="donate" class="section">
   <div class="card">
     <h3>Донат</h3>
     <p>Отримуйте бонуси, унікальні предмети та VIP статус за донат на сервері.</p>
   </div>
+</section>
+
+<section id="shop" class="section">
   <div class="card">
     <h3>Магазин</h3>
     <p>Купуйте скіни, предмети та унікальні пакети прямо у нашому магазині.</p>
   </div>
 </section>
 
+<section id="forum" class="section">
+  <div class="card">
+    <h3>Форум</h3>
+    <p>Спілкуйтеся з іншими гравцями, обговорюйте стратегії та ідеї.</p>
+  </div>
+</section>
+
 <!-- ================= ФУТЕР ================= -->
 <footer class="footer">
-  <p>&copy; 2025 ReallyWorld. Всі права захищені. | <a href="#">Політика конфіденційності</a></p>
+  <p>&copy; 2025 RAideGrime. Всі права захищені. | <a href="#">Політика конфіденційності</a></p>
 </footer>
 
 </body>
