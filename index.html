@@ -95,7 +95,8 @@ body {
 
 /* ================= КНОПКИ ================= */
 .button {
-  background-color: #f39c12;
+  display: inline-block;
+  background-color: #f39c12; /* оранжеві */
   color: #121212;
   padding: 18px 36px;
   margin: 10px;
@@ -104,17 +105,20 @@ body {
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
   transition: all 0.2s ease;
+  box-shadow: 0 0 5px rgba(243,156,18,0.5);
 }
 
 .button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(243,156,18,0.7);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(243,156,18,0.8), 0 0 40px rgba(243,156,18,0.6);
 }
 
 .button:active {
   transform: scale(0.95);
-  box-shadow: 0 0 8px rgba(230,126,34,0.7);
+  box-shadow: 0 0 10px rgba(230,126,34,0.7);
 }
 
 /* ================= СЕКЦІЯ ПРО СЕРВЕР ================= */
@@ -207,11 +211,9 @@ body {
 <section class="hero">
   <h1>Ласкаво просимо в ReallyWorld</h1>
   <p>Найкрутіший сервер для геймерів з донатом, магазинами та унікальними функціями!</p>
-  
   <div>
-  <a href="game.html" class="button">Почати гру</a>
-  <a href="#details" class="button">Детальніше</a>
-
+    <a href="game.html" class="button">Почати гру</a>
+    <a href="#details" class="button">Детальніше</a>
   </div>
 </section>
 
