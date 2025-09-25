@@ -5,60 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GrimRaide</title>
 <style>
-/* --- Анімаційний фон з хвилями --- */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    background: url('https://cdn.discordapp.com/attachments/1410357870762922125/1420817721276502036/images.png?ex=68d6c71e&is=68d5759e&hm=19c053106d16fc358e95f937de2b21c8d26952e4be3edbb0ac6f49f88a2f8bab&') no-repeat center center fixed;
+    background-size: cover;
     overflow-x: hidden;
-    background: #0a0a0a;
-    color: #f2f2f2;
 }
 
-body::before {
-    content:"";
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: linear-gradient(270deg, #ff4ec7, #8c2eff, #ff9cff, #ff4ec7);
-    background-size: 800% 800%;
-    z-index:-1;
-    animation: gradientMove 20s ease infinite;
-}
-
-@keyframes gradientMove {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-
-/* --- КОНТЕЙНЕР --- */
-.container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px 0;
-}
-
-/* --- ЛОГО ТЕКСТОМ З РОЖЕВО-ФІОЛЕТОВИМ ГРАДІЄНТОМ --- */
+/* ЛОГО У СТИЛІ MINECRAFT */
 h1 {
-    text-align: center;
-    font-size: 64px;
+    font-size: 72px;
     font-weight: bold;
-    background: linear-gradient(90deg, #ff4ec7, #8c2eff, #ff9cff);
+    text-align: center;
+    margin: 40px 0;
+    background: linear-gradient(to bottom, #4caf50 40%, #8b5a2b 40%, #8b5a2b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: glowText 2s ease-in-out infinite alternate;
-    margin: 40px 0 20px 0;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
 }
 
-@keyframes glowText {
-    0% {text-shadow: 0 0 15px #ff4ec7, 0 0 30px #8c2eff, 0 0 45px #ff9cff;}
-    100% {text-shadow: 0 0 30px #ff4ec7, 0 0 60px #8c2eff, 0 0 90px #ff9cff;}
-}
-
-/* --- ГОЛОВНІ АНІМОВАНІ КНОПКИ --- */
+/* КНОПКИ ВЕРХНІ */
 .top-buttons {
     display: flex;
     justify-content: center;
@@ -70,160 +38,125 @@ h1 {
     background-color: rgba(0,0,0,0.6);
     color: #fff;
     padding: 14px 30px;
-    border-radius: 12px;
+    border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
-    border: none;
+    border: 2px solid #fff;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
-.top-buttons .btn::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(255,255,255,0.15);
-    transform: rotate(45deg);
-    transition: all 0.5s ease;
-}
-.top-buttons .btn:hover::before {
-    top: 0;
-    left: 0;
 }
 .top-buttons .btn:hover {
     background-color: rgba(0,0,0,0.8);
-    transform: scale(1.07);
+    transform: scale(1.05);
 }
 
-/* --- СЕКЦІЇ З РАМКАМИ --- */
+/* СЕКЦІЇ */
 .section {
-    background-color: rgba(0,0,0,0.55);
-    border: 2px solid #ff4ec7;
+    background-color: rgba(0,0,0,0.6);
+    border: 2px solid #fff;
     padding: 25px;
-    border-radius: 15px;
+    border-radius: 12px;
     margin-bottom: 30px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    transition: all 0.3s ease;
-}
-.section:hover {
-    border-color: #8c2eff;
-    box-shadow: 0 0 30px rgba(255,78,199,0.7);
 }
 
-/* --- СУЧАСНІ КНОПКИ TELEGRAM / DISCORD --- */
+/* SOCIAL BUTTONS */
 .social-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
-    flex-wrap: wrap;
-    margin: 20px 0 40px 0;
+    margin-bottom: 40px;
 }
 .social-buttons .btn {
-    background-color: #ff4ec7;
-    color: #fff;
     padding: 14px 28px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
+    border-radius: 10px;
     border: none;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
-.social-buttons .btn.discord { background-color: #5865f2; }
+.social-buttons .btn.telegram { background-color: #0088cc; color: #fff; }
+.social-buttons .btn.discord { background-color: #5865f2; color: #fff; }
 .social-buttons .btn:hover { opacity: 0.85; transform: scale(1.05); }
 
-/* --- ФУТЕР --- */
+/* ФУТЕР */
 footer {
-    background-color: rgba(0,0,0,0.6);
     text-align: center;
-    padding: 25px 10px;
+    padding: 20px 10px;
     font-size: 14px;
     color: #ccc;
-    border-top: 2px solid #ff4ec7;
-}
-
-/* --- АДАПТИВНІСТЬ --- */
-@media(max-width: 600px) {
-    .top-buttons .btn { font-size: 14px; padding: 10px 20px; }
-    .social-buttons .btn { font-size: 14px; padding: 10px 18px; }
-    h1 { font-size: 42px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ЛОГО ТЕКСТОМ -->
-<h1>GrimRaide</h1>
+<div class="container">
+  <!-- ЛОГО MINECRAFT -->
+  <h1>GrimRaide</h1>
 
-<!-- ГОЛОВНІ АНІМОВАНІ КНОПКИ -->
-<div class="top-buttons">
+  <!-- ВЕРХНІ КНОПКИ -->
+  <div class="top-buttons">
     <button class="btn">Донат</button>
     <button class="btn">Новини</button>
     <button class="btn">Як зайти</button>
+  </div>
+
+  <!-- КОНТЕНТ -->
+  <div class="section">
+    <p><b>Ласкаво просимо на GrimRaide</b><br>
+    Сервер у стилі ReallyWorld — PvP, виживання, економіка та активна спільнота. Тут — вайпи, змагання, магазин привілеїв та регулярні івенти.</p>
+
+    <p>Підключитись: <i>видалено</i></p>
+
+    <p>Донат / Магазин | Правила | Останні новини | Скопіювати IP</p>
+
+    <p>Питання по платежах — Telegram / Discord підтримка</p>
+
+    <h2>Донат</h2>
+    <p>Покращені ранги, набори та косметика</p>
+
+    <h2>Магазин</h2>
+    <p>Підтримка</p>
+
+    <h2>Гриферське виживання</h2>
+    <p>Вільний світ, рейди, PvP — класичний режим з елементами економіки та профітними рейдами.</p>
+
+    <h2>Ранги та привілеї</h2>
+    <p>Купуй ранги для зручностей: захищені ділянки, привілеї та косметика.</p>
+
+    <h2>Івенти та розіграші</h2>
+    <p>Регулярні події, PvP-турніри та бонуси для найактивніших гравців.</p>
+
+    <h2>Останні новини</h2>
+    <p>Великий вайп 2.0 — дата анонсу<br>
+    Готуємо оновлення карт, нові боси та призи. Слідкуй за оновленнями в нашому Telegram.</p>
+    <p>Розіграш наборів серед донатерів<br>
+    Щомісячний розіграш — переможці отримають унікальні косметичні набори.</p>
+
+    <h2>Правила сервера</h2>
+    <ul>
+    <li>Заборонено читерство та експлойти.</li>
+    <li>Повага до інших гравців — без образ та расизму.</li>
+    <li>Не використовуйте баги для отримання переваг.</li>
+    <li>Донат не повинен давати перевагу у турнірах.</li>
+    </ul>
+
+    <h2>Магазин / Донат</h2>
+    <p>RaidMate 75 грн — косметика та бонуси <button class="btn">Купити</button></p>
+    <p>Grim 299 грн — преміум пакет <button class="btn">Купити</button></p>
+    <p>Платіжні системи: WayForPay, LiqPay, PrivatBank — підключаєш бекенд для обробки.</p>
+  </div>
+
+  <!-- SOCIAL BUTTONS -->
+  <div class="social-buttons">
+    <button class="btn telegram">Telegram</button>
+    <button class="btn discord">Discord</button>
+  </div>
+
+  <!-- ФУТЕР -->
+  <footer>
+    © GrimRaide • Усі права захищені
+  </footer>
 </div>
-
-<!-- КОНТЕНТ СЕРВЕРА -->
-<div class="container section">
-<p><b>Ласкаво просимо на GrimRaide</b><br>
-Сервер у стилі ReallyWorld — PvP, виживання, економіка та активна спільнота. Тут — вайпи, змагання, магазин привілеїв та регулярні івенти.</p>
-
-<p>Підключитись: <i>видалено</i></p>
-
-<p>Донат / Магазин | Правила | Останні новини | Скопіювати IP</p>
-
-<p>Питання по платежах — Telegram / Discord підтримка</p>
-
-<h2>Донат</h2>
-<p>Покращені ранги, набори та косметика</p>
-
-<h2>Магазин</h2>
-<p>Підтримка</p>
-
-<h2>Гриферське виживання</h2>
-<p>Вільний світ, рейди, PvP — класичний режим з елементами економіки та профітними рейдами.</p>
-
-<h2>Ранги та привілеї</h2>
-<p>Купуй ранги для зручностей: захищені ділянки, привілеї та косметика.</p>
-
-<h2>Івенти та розіграші</h2>
-<p>Регулярні події, PvP-турніри та бонуси для найактивніших гравців.</p>
-
-<h2>Останні новини</h2>
-<p>Великий вайп 2.0 — дата анонсу<br>
-Готуємо оновлення карт, нові боси та призи. Слідкуй за оновленнями в нашому Telegram.</p>
-<p>Розіграш наборів серед донатерів<br>
-Щомісячний розіграш — переможці отримають унікальні косметичні набори.</p>
-
-<h2>Правила сервера</h2>
-<ul>
-<li>Заборонено читерство та експлойти.</li>
-<li>Повага до інших гравців — без образ та расизму.</li>
-<li>Не використовуйте баги для отримання переваг.</li>
-<li>Донат не повинен давати перевагу у турнірах.</li>
-</ul>
-
-<h2>Магазин / Донат</h2>
-<p>RaidMate 75 грн — косметика та бонуси <button class="btn">Купити</button></p>
-<p>Grim 299 грн — преміум пакет <button class="btn">Купити</button></p>
-<p>Платіжні системи: WayForPay, LiqPay, PrivatBank — підключаєш бекенд для обробки.</p>
-</div>
-
-<!-- СУЧАСНІ КНОПКИ TELEGRAM / DISCORD -->
-<div class="social-buttons">
-<button class="btn">Перейти в Telegram</button>
-<button class="btn discord">Перейти в Discord</button>
-</div>
-
-<!-- ФУТЕР -->
-<footer>
-© GrimRaide • Усі права захищені
-</footer>
 
 </body>
 </html>
