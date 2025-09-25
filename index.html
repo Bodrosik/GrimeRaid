@@ -1,131 +1,363 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GrimRaide | Minecraft Server</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GrimRaide — офіційний сайт сервера</title>
+  <meta name="description" content="GrimRaide — PvP · Survival · Economy. Підключайся: mc.grimraide.net" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    :root{
+      --bg-1:#05060a;
+      --bg-2:#0b1116;
+      --card:#0f151a;
+      --accent:#d9534f;
+      --accent-2:#ff7b6b;
+      --muted:#9aa6b2;
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,system-ui, sans-serif;background:
+      radial-gradient(800px 400px at 10% 10%, rgba(217,83,79,0.04), transparent),
+      radial-gradient(600px 300px at 90% 90%, rgba(59,130,246,0.03), transparent),
+      linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:#e7eef6;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1200px;margin:18px auto;padding:18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 6px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:64px;height:64px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:900;font-family:Montserrat, sans-serif;color:#071018;
+      font-size:22px;box-shadow:0 12px 40px rgba(217,83,79,0.12)
+    }
+    .brand h1{margin:0;font-size:20px;letter-spacing:0.4px}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    nav{display:flex;gap:10px;align-items:center}
+    .nav-btn{
+      padding:10px 14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border:1px solid rgba(255,255,255,0.03);font-weight:700;font-size:13px;cursor:pointer;backdrop-filter:blur(4px);
+      transition:transform .18s ease, box-shadow .18s ease, background .18s;
+    }
+    .nav-btn:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+    .nav-btn.primary{
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      color:#071018;box-shadow:0 14px 40px rgba(217,83,79,0.14)
     }
 
-    header {
-      width: 100%;
-      padding: 20px;
-      text-align: center;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(6px);
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:12px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);
+         padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 40px rgba(2,6,10,0.7)}
+    .hero-left h2{margin:0;font-family:Montserrat, sans-serif;font-weight:800;font-size:26px}
+    .hero-left p{color:var(--muted);margin-top:8px}
+    .action-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .cta{
+      padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:10px;
+      background:linear-gradient(90deg,#0ea5e9,#3b82f6);color:#071018;border:none;box-shadow:0 12px 30px rgba(59,130,246,0.12);
+      transition:transform .16s,box-shadow .16s;
+    }
+    .cta:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(59,130,246,0.18)}
+    .ghost{
+      padding:12px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.05);background:transparent;color:var(--muted);
+      transition:all .16s;cursor:pointer;font-weight:700
+    }
+    .ghost:hover{transform:translateY(-4px);background:var(--glass)}
+    .ip-block{margin-top:16px;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));display:flex;justify-content:space-between;align-items:center}
+    .ip-left{display:flex;flex-direction:column}
+    .ip-left .label{font-size:12px;color:var(--muted)}
+    .ip-left .value{font-weight:800;font-family:Montserrat, sans-serif;font-size:18px;margin-top:4px}
+    .version{font-size:13px;color:var(--muted);text-align:right}
+
+    /* Right column (clean) */
+    .server-card{display:flex;flex-direction:column;gap:10px}
+    .server-card .big{font-family:Montserrat, sans-serif;font-weight:800;font-size:22px}
+    .server-card .sub{color:var(--muted);font-size:13px}
+    .server-card .mini-row{display:flex;gap:8px;align-items:center;justify-content:space-between}
+
+    /* Sections */
+    section.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .feature h4{margin:0;font-size:16px}
+    .feature p{margin:6px 0 0 0;color:var(--muted);font-size:13px}
+
+    /* News / rules / shop */
+    .news-list{display:flex;flex-direction:column;gap:10px}
+    .news-item{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.03)}
+    .news-item h5{margin:0;font-size:15px}
+    .news-item p{margin:8px 0 0 0;color:var(--muted);font-size:13px}
+
+    .rules{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.03)}
+    .rules ol{margin:8px 0 0 18px;color:var(--muted)}
+
+    /* Map frame */
+    .map-wrap{margin-top:18px;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,0.04);box-shadow:0 18px 60px rgba(2,6,10,0.7)}
+    .map-iframe{width:100%;height:64vh;border:0;display:block}
+
+    /* Footer with framed socials */
+    footer{margin-top:28px;padding:20px 10px;display:flex;flex-direction:column;align-items:center;gap:14px}
+    .social-frame{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .social-card{
+      min-width:220px;max-width:340px;padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:12px;justify-content:space-between;
+      transition:transform .16s,box-shadow .16s;
+    }
+    .social-card:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,0.6)}
+    .social-left{display:flex;gap:10px;align-items:center}
+    .social-pill{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,#9333ea,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:800}
+    .social-info h4{margin:0;font-size:16px}
+    .social-info p{margin:4px 0 0 0;color:var(--muted);font-size:13px}
+    .social-link{padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,#06b6d4,#3b82f6);color:#071018;font-weight:800;text-decoration:none}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      section.grid{grid-template-columns:repeat(2,1fr)}
+      .map-iframe{height:56vh}
+    }
+    @media (max-width:640px){
+      header{padding:10px}
+      .logo{width:52px;height:52px}
+      .brand h1{font-size:18px}
+      nav{display:none}
+      section.grid{grid-template-columns:1fr}
+      .map-iframe{height:48vh}
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
-      color: #38bdf8;
+    /* small micro-animations for decorative lines */
+    .glow {
+      position:relative;
     }
-
-    .info {
-      margin-top: 40px;
-      text-align: center;
+    .glow:after{
+      content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+      box-shadow:0 0 60px rgba(217,83,79,0.06);
+      opacity:0;transition:opacity .25s;
     }
-
-    .info h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: #facc15;
-    }
-
-    .info p {
-      font-size: 1.2rem;
-    }
-
-    .btn {
-      display: inline-block;
-      margin: 15px;
-      padding: 15px 40px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: white;
-      background: linear-gradient(90deg, #38bdf8, #3b82f6);
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
-    }
-
-    footer {
-      margin-top: 60px;
-      width: 100%;
-      padding: 30px;
-      background: rgba(255, 255, 255, 0.05);
-      border-top: 3px solid #38bdf8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
-
-    footer h3 {
-      font-size: 1.5rem;
-      margin: 0;
-      color: #38bdf8;
-    }
-
-    .socials {
-      display: flex;
-      gap: 20px;
-    }
-
-    .socials a {
-      display: inline-block;
-      padding: 12px 28px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      border-radius: 10px;
-      color: white;
-      background: linear-gradient(90deg, #9333ea, #6366f1);
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .socials a:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 15px rgba(147, 51, 234, 0.7);
-    }
+    .glow:hover:after{opacity:1}
   </style>
 </head>
 <body>
-  <header>
-    <h1>GrimRaide</h1>
-  </header>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">GR</div>
+        <div>
+          <h1>GrimRaide</h1>
+          <p>PvP · Survival · Economy — офіційний сайт</p>
+        </div>
+      </div>
 
-  <section class="info">
-    <h2>IP Сервера:</h2>
-    <p><strong>grimraide.mc.net</strong></p>
-    <h2>Версія:</h2>
-    <p><strong>1.20.1</strong></p>
+      <nav>
+        <a class="nav-btn" href="#about">Про сервер</a>
+        <a class="nav-btn" href="#map">Карта</a>
+        <a class="nav-btn" href="#news">Новини</a>
+        <a class="nav-btn" href="#rules">Правила</a>
+        <a class="nav-btn" href="#shop">Магазин</a>
+        <a class="nav-btn" href="#contacts">Контакти</a>
+        <button class="nav-btn primary" onclick="document.getElementById('map').scrollIntoView({behavior:'smooth'})">Підключитись</button>
+      </nav>
+    </header>
 
-    <a href="#" class="btn">Почати гру</a>
-    <a href="#" class="btn">Донат</a>
-  </section>
+    <!-- HERO -->
+    <div class="hero">
+      <div class="card hero-left">
+        <h2>Ласкаво просимо на <span style="color:var(--accent);">GrimRaide</span></h2>
+        <p>Сервер у стилі ReallyWorld — PvP, виживання, економіка та активна спільнота. Тут — вайпи, змагання, магазин привілеїв та регулярні івенти.</p>
 
-  <footer>
-    <h3>Приєднуйся до нашої спільноти:</h3>
-    <div class="socials">
-      <a href="#">Telegram</a>
-      <a href="#">Discord</a>
+        <div class="action-row">
+          <a class="cta" href="#" onclick="navigator.clipboard && navigator.clipboard.writeText('mc.grimraide.net:25565')">Підключитись <span style="opacity:.8;font-size:13px">mc.grimraide.net:25565</span></a>
+          <a class="ghost" href="#shop">Донат / Магазин</a>
+          <a class="ghost" href="#rules">Правила</a>
+          <a class="ghost" href="#news">Останні новини</a>
+          <a class="ghost" href="#" onclick="alert('Копіювання IP в буфер обміну');navigator.clipboard&&navigator.clipboard.writeText('mc.grimraide.net:25565')">Скопіювати IP</a>
+        </div>
+
+        <div class="ip-block">
+          <div class="ip-left">
+            <div class="label">IP сервера</div>
+            <div class="value">mc.grimraide.net</div>
+          </div>
+          <div class="version">
+            <div class="label">Версія</div>
+            <div style="font-weight:800">1.20.x</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card server-card">
+        <div>
+          <div class="big">Сервер: <span style="color:var(--accent)">GrimRaide</span></div>
+          <div class="sub">Тут буде короткий опис та швидкі посилання.</div>
+        </div>
+
+        <div class="mini-row">
+          <div style="flex:1">
+            <div class="sub" style="font-weight:700">Донат</div>
+            <div class="sub" style="color:var(--muted)">Покращені ранги, набори та косметика</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <a class="nav-btn" href="#shop">Магазин</a>
+          <a class="nav-btn" href="#contacts">Підтримка</a>
+        </div>
+      </aside>
     </div>
-  </footer>
+
+    <!-- FEATURES -->
+    <section class="grid" id="about">
+      <div class="card feature">
+        <h4>Гриферське виживання</h4>
+        <p>Вільний світ, рейди, PvP — класичний режим з елементами економіки та профітними рейдами.</p>
+      </div>
+      <div class="card feature">
+        <h4>Ранги та привілеї</h4>
+        <p>Купуй ранги для зручностей: захищені ділянки, привілеї та косметика.</p>
+      </div>
+      <div class="card feature">
+        <h4>Івенти та розіграші</h4>
+        <p>Регулярні події, PvP-турніри та бонуси для найактивніших гравців.</p>
+      </div>
+    </section>
+
+    <!-- NEWS + RULES + SHOP -->
+    <section style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-top:18px">
+      <div class="card" id="news">
+        <h3 style="margin:0 0 12px 0">Останні новини</h3>
+        <div class="news-list">
+          <article class="news-item">
+            <h5>Великий вайп 2.0 — дата анонсу</h5>
+            <p>Готуємо оновлення карт, нові боси та призи. Слідкуй за оновленнями в нашому Telegram.</p>
+          </article>
+          <article class="news-item">
+            <h5>Розіграш наборів серед донатерів</h5>
+            <p>Щомісячний розіграш — переможці отримають унікальні косметичні набори.</p>
+          </article>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card rules" id="rules">
+          <h3 style="margin:0 0 8px 0">Правила сервера</h3>
+          <ol>
+            <li>Заборонено читерство та експлойти.</li>
+            <li>Повага до інших гравців — без образ та расизму.</li>
+            <li>Не використовуйте баги для отримання переваг.</li>
+            <li>Донат не повинен давати перевагу у турнірах.</li>
+          </ol>
+        </div>
+
+        <div class="card" id="shop">
+          <h3 style="margin:0 0 8px 0">Магазин / Донат</h3>
+          <div style="display:flex;gap:8px;flex-direction:column">
+            <div style="display:flex;gap:8px">
+              <div style="flex:1;padding:12px;border-radius:10px;background:var(--glass);text-align:center">
+                <div style="font-weight:800">RaidMate</div>
+                <div style="color:var(--muted);font-size:13px">75 грн — косметика та бонуси</div>
+                <a class="nav-btn" href="#" style="margin-top:8px;display:inline-block">Купити</a>
+              </div>
+              <div style="flex:1;padding:12px;border-radius:10px;background:var(--glass);text-align:center">
+                <div style="font-weight:800">Grim</div>
+                <div style="color:var(--muted);font-size:13px">299 грн — преміум пакет</div>
+                <a class="nav-btn" href="#" style="margin-top:8px;display:inline-block">Купити</a>
+              </div>
+            </div>
+            <div style="color:var(--muted);font-size:13px">Платіжні системи: WayForPay, LiqPay, PrivatBank — підключаєш бекенд для обробки.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section id="map" class="map-wrap">
+      <!-- Замініть src нижче на ваш проксований піддомен або прямий URL карти (blueMap/dynmap) -->
+      <iframe class="map-iframe" src="https://map.grimraide.net/" title="GrimRaide Map" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+    </section>
+
+    <!-- CONTACTS / FOOTER -->
+    <footer id="contacts">
+      <div style="max-width:1100px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-weight:800">Зв'язок</div>
+          <div style="color:var(--muted);font-size:13px">Питання по платежах — Telegram / Discord підтримка</div>
+        </div>
+
+        <div class="social-frame" style="margin-left:auto">
+          <div class="social-card glow">
+            <div class="social-left">
+              <div class="social-pill">TG</div>
+              <div class="social-info">
+                <h4>Telegram</h4>
+                <p>Офіційний канал та підтримка</p>
+              </div>
+            </div>
+            <!-- Замінити href на ваш TG -->
+            <a class="social-link" href="#" role="button">Перейти</a>
+          </div>
+
+          <div class="social-card glow">
+            <div class="social-left">
+              <div class="social-pill">DC</div>
+              <div class="social-info">
+                <h4>Discord</h4>
+                <p>Сервер спільноти та чат підтримки</p>
+              </div>
+            </div>
+            <!-- Замінити href на ваш Discord -->
+            <a class="social-link" href="#" role="button">Перейти</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:100%;max-width:1100px;margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="color:var(--muted);font-size:13px">© GrimRaide — mc.grimraide.net • Порт: 25565</div>
+        <div style="color:var(--muted);font-size:13px">Made with ❤️ — стиль: темний, premium</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Лише UI: підсвічування меню по скролу
+    const sections = document.querySelectorAll('section, header');
+    const navButtons = document.querySelectorAll('nav .nav-btn');
+    function onScroll() {
+      const y = window.scrollY + 120;
+      sections.forEach(sec => {
+        if(!sec.id) return;
+        const el = document.getElementById(sec.id);
+        if(!el) return;
+      });
+    }
+    window.addEventListener('scroll', onScroll);
+
+    // Smooth anchor scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+      })
+    });
+
+    // Map iframe fallback: якщо карта недоступна, показуємо повідомлення
+    const iframe = document.querySelector('.map-iframe');
+    iframe.addEventListener('error', ()=> {
+      const parent = iframe.parentElement;
+      parent.innerHTML = '<div style="padding:30px;text-align:center;color:var(--muted)">Карта недоступна. Перевірте налаштування проксі/URL.</div>';
+    });
+
+    // Копіювання IP при кліку на CTA (показ повідомлення)
+    document.querySelectorAll('.cta').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        // якщо користувач натиснув на нього — запобігти переходу (для прикладу)
+        e.preventDefault();
+        const ip = 'mc.grimraide.net:25565';
+        if(navigator.clipboard) navigator.clipboard.writeText(ip);
+        alert('IP скопійовано: ' + ip + '\\nВідкрий Minecraft і встави IP або встав його вручну.');
+      });
+    });
+  </script>
 </body>
 </html>
