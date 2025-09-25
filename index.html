@@ -1,246 +1,339 @@
-<!DOCTYPE html>
+<!--
+  GrimRaide - Single-file Responsive HTML landing page for GitHub
+  Purpose: Landing / info / donation / server status page for a Minecraft server
+  Notes: Save as GrimRaide_single_file_site.html and open in browser. Works on mobile and desktop.
+-->
+<!doctype html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GrimeRaide</title>
-<style>
-/* ================= ОСНОВНІ СТИЛІ ================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
-}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GrimRaide | Minecraft Server</title>
+  <meta name="description" content="GrimRaide — PvP · Survival · Economy. Підключайся: mc.grimraide.net">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f13; --card:#0f1418; --accent:#d9534f; --muted:#9aa6b2; --glass: rgba(255,255,255,0.04);
+      --max-width:1100px; --radius:14px; --glass-2: rgba(255,255,255,0.02);
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(217,83,79,0.06), transparent), radial-gradient(900px 500px at 90% 90%, rgba(28,34,40,0.08), transparent), var(--bg); color:#eef2f4; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+    }
+    .container{max-width:var(--max-width); margin:28px auto; padding:20px}
 
-body {
-  background-color: #121212;
-  color: #eee;
-  line-height: 1.6;
-}
+    /* Header */
+    header{display:flex;align-items:center;gap:18px;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff8b73);display:flex;align-items:center;justify-content:center;font-family:Montserrat, sans-serif;font-weight:900;color:#091018;font-size:20px;box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+    .brand h1{margin:0;font-size:18px;line-height:1}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
 
-/* ================= НАВІГАЦІЯ ================= */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(90deg, #1f1f1f, #272727);
-  padding: 15px 50px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
+    nav{display:flex;gap:10px;align-items:center}
+    .btn{background:var(--glass);border:1px solid rgba(255,255,255,0.03);padding:8px 12px;border-radius:10px;color:inherit;text-decoration:none;font-weight:600;font-size:14px}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff8b73);color:#071018;box-shadow:0 8px 24px rgba(217,83,79,0.12)}
 
-.navbar .logo {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #f39c12;
-}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);padding:20px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,6,10,0.6)}
+    .hero .lead{padding:36px 28px;border-radius:12px}
+    .lead h2{margin:0 0 8px 0;font-family:Montserrat, sans-serif;font-weight:800;letter-spacing:0.6px}
+    .lead p{margin:0;color:var(--muted)}
+    .stats{display:flex;gap:12px;margin-top:16px}
+    .stat{flex:1;background:var(--glass);padding:10px;border-radius:10px;text-align:center}
+    .stat h3{margin:0;font-size:16px}
+    .stat p{margin:4px 0 0 0;color:var(--muted);font-size:13px}
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-}
+    /* Server status card */
+    .status{display:flex;flex-direction:column;gap:10px}
+    .status .ip{font-weight:700;font-size:16px}
+    .status .big-num{font-family:Montserrat, sans-serif;font-weight:800;font-size:36px}
 
-.navbar ul li a {
-  color: #eee;
-  text-decoration: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  transition: 0.3s;
-  font-weight: bold;
-}
+    /* Features / sections */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .feature h4{margin:0 0 8px 0}
+    .feature p{margin:0;color:var(--muted);font-size:13px}
 
-.navbar ul li a:hover {
-  background-color: #f39c12;
-  color: #121212;
-}
+    /* Ranks */
+    .ranks{display:flex;gap:12px;overflow:auto;padding-bottom:6px}
+    .rank{min-width:190px;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03)}
+    .rank h5{margin:0 0 6px 0}
+    .rank p{margin:0;color:var(--muted);font-size:13px}
 
-/* ================= ГОЛОВНИЙ БАНЕР ================= */
-.hero {
-  height: 600px;
-  background: url('https://images.unsplash.com/photo-1620317821828-b9e7b7e39a50?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-}
+    footer{margin-top:28px;padding:12px 0;text-align:center;color:var(--muted);font-size:13px}
 
-.hero::after {
-  content: '';
-  position: absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background-color: rgba(0,0,0,0.5);
-}
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:640px){
+      header{gap:8px}
+      .logo{width:48px;height:48px;font-size:18px}
+      .brand h1{font-size:16px}
+      .grid-3{grid-template-columns:1fr}
+      nav{display:none}
+      .container{padding:14px}
+    }
 
-.hero h1 {
-  font-size: 4rem;
-  color: #fff;
-  z-index: 1;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
-}
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);font-weight:700}
 
-.hero p {
-  font-size: 1.5rem;
-  color: #ddd;
-  z-index: 1;
-  margin-bottom: 30px;
-}
+    /* Modal */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;z-index:120;visibility:hidden;opacity:0;transition:all .18s}
+    .modal.show{visibility:visible;opacity:1}
+    .modal .panel{width:100%;max-width:720px;background:linear-gradient(180deg, #071018, #0e1519);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
 
-/* ================= КНОПКИ ================= */
-.button {
-  display: inline-block;
-  background-color: #f39c12; /* оранжеві */
-  color: #121212;
-  padding: 18px 36px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  transition: all 0.2s ease;
-  box-shadow: 0 0 5px rgba(243,156,18,0.5);
-}
+    /* tiny form */
+    input, textarea, select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    .row{display:flex;gap:10px}
+    .row > *{flex:1}
+    .small{font-size:13px}
 
-.button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(243,156,18,0.8), 0 0 40px rgba(243,156,18,0.6);
-}
+    /* small topbar for mobile */
+    .mobile-bar{position:fixed;left:0;right:0;bottom:16px;display:flex;gap:8px;justify-content:center;padding:0 12px}
+    .mobile-bar .btn{padding:12px 18px;border-radius:12px}
 
-.button:active {
-  transform: scale(0.95);
-  box-shadow: 0 0 10px rgba(230,126,34,0.7);
-}
-
-/* ================= СЕКЦІЯ ПРО СЕРВЕР ================= */
-.section {
-  padding: 80px 50px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-}
-
-.card {
-  background-color: #1f1f1f;
-  border-radius: 15px;
-  width: 300px;
-  padding: 25px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.7);
-}
-
-.card h3 {
-  margin-bottom: 15px;
-  color: #f39c12;
-  font-size: 1.5rem;
-}
-
-.card p {
-  color: #ccc;
-  font-size: 1rem;
-}
-
-/* ================= ФУТЕР ================= */
-.footer {
-  background: linear-gradient(90deg, #1f1f1f, #272727);
-  color: #eee;
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.footer a {
-  color: #f39c12;
-  text-decoration: none;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
-/* ================= АДАПТИВНІСТЬ ================= */
-@media (max-width: 900px) {
-  .navbar {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .hero h1 {
-    font-size: 3rem;
-  }
-  .hero p {
-    font-size: 1.2rem;
-  }
-  .section {
-    padding: 50px 20px;
-  }
-  .card {
-    width: 90%;
-  }
-}
-</style>
+  </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">GR</div>
+        <div>
+          <h1>GrimRaide</h1>
+          <p class="muted">PvP · Survival · Economy — mc.grimraide.net</p>
+        </div>
+      </div>
+      <nav>
+        <a class="btn" href="#features">Про сервер</a>
+        <a class="btn" href="#ranks">Ранги</a>
+        <a class="btn" href="#rules">Правила</a>
+        <a class="btn" id="connectBtn">Підключитись</a>
+        <a class="btn primary" id="donateBtn">Донат / Магазин</a>
+      </nav>
+    </header>
 
-<!-- ================= НАВІГАЦІЯ ================= -->
-<nav class="navbar">
-  <div class="logo">GrimeRaide</div>
-  <ul>
-    <li><a href="#">Огляд серверу</a></li>
-    <li><a href="#">IP</a></li>
-    <li><a href="#">Донат</a></li>
-    <li><a href="#">Магазин</a></li>
-    <li><a href="#">Форум</a></li>
-  </ul>
-</nav>
+    <main>
+      <section class="hero">
+        <div class="card lead">
+          <h2>Ласкаво просимо на GrimRaide</h2>
+          <p>Сервер у стилі ReallyWorld — PvP, виживання, економіка та система привілеїв. Бiльше подій, часті вайпи, власний магазин та дружня спільнота.</p>
 
-<!-- ================= ГОЛОВНИЙ БАНЕР ================= -->
-<section class="hero">
-  <h1>Ласкаво просимо в ReallyWorld</h1>
-  <p>Найкрутіший сервер для геймерів з донатом, магазинами та унікальними функціями!</p>
-  <div>
-    <a href="game.html" class="button">Почати гру</a>
-    <a href="#details" class="button">Детальніше</a>
-  </div>
-</section>
+          <div class="stats" style="margin-top:18px">
+            <div class="stat"><h3 id="players">—</h3><p>Гравців онлайн</p></div>
+            <div class="stat"><h3 id="uptime">—</h3><p>Останній вайп</p></div>
+            <div class="stat"><h3 id="tps">—</h3><p>TPS / Ping</p></div>
+          </div>
 
-<!-- ================= СЕКЦІЯ ПРО СЕРВЕР ================= -->
-<section class="section">
-  <div class="card">
-    <h3>Сервер</h3>
-    <p>Наш сервер підтримує великі геймерські події, PvP та квести для всіх гравців.</p>
-  </div>
-  <div class="card">
-    <h3>IP Сервера</h3>
-    <p>Підключайтесь до нашого серверу за IP: play.reallyworld.me і насолоджуйтесь грою!</p>
-  </div>
-  <div class="card">
-    <h3>Донат</h3>
-    <p>Отримуйте бонуси, унікальні предмети та VIP статус за донат на сервері.</p>
-  </div>
-  <div class="card">
-    <h3>Магазин</h3>
-    <p>Купуйте скіни, предмети та унікальні пакети прямо у нашому магазині.</p>
-  </div>
-</section>
+          <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn primary" id="joinNow">Підключитись: mc.grimraide.net</a>
+            <a class="btn" id="discordBtn">Discord</a>
+            <a class="btn" id="tgBtn">Telegram</a>
+          </div>
 
-<!-- ================= ФУТЕР ================= -->
-<footer class="footer">
-  <p>&copy; 2025 ReallyWorld. Всі права захищені. | <a href="#">Політика конфіденційності</a></p>
-</footer>
+          <div style="margin-top:18px;color:var(--muted);font-size:13px">IP: <span class="pill">mc.grimraide.net</span>  •  Порт: 25565</div>
+        </div>
 
+        <aside class="card status">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div class="ip muted">Сервер</div>
+              <div class="big-num" id="statusBig">налаштовується...</div>
+            </div>
+            <div style="text-align:right">
+              <div class="muted small">Версія</div>
+              <div style="font-weight:800">1.20.x</div>
+            </div>
+          </div>
+
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <div style="flex:1">
+              <div class="muted small">Online</div>
+              <div id="onlineMini">—</div>
+            </div>
+            <div style="flex:1">
+              <div class="muted small">Max</div>
+              <div id="maxMini">—</div>
+            </div>
+            <div style="flex:1">
+              <div class="muted small">Ping</div>
+              <div id="pingMini">—</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <div class="muted small">Останні новини</div>
+            <ul id="newsList" style="margin:8px 0 0 16px;padding:0;color:var(--muted)"></ul>
+          </div>
+        </aside>
+      </section>
+
+      <section id="features" class="grid-3">
+        <div class="card feature">
+          <h4>Гриферсkое виживання</h4>
+          <p>Класичний PvP-survival з вільною економікою — будуй, грабуй, обороняйся. Є захищені старт-зони та вільний світ.</p>
+        </div>
+        <div class="card feature">
+          <h4>Магазин і ранги</h4>
+          <p>Покупка привілеїв дає доступ до зручностей: приватні острови, захищені доми, особливі набори та косметика.</p>
+        </div>
+        <div class="card feature">
+          <h4>Події та змагання</h4>
+          <p>Регулярні PvP-івенти, івенти на побудову та розіграші серед донатерів. Топ гравців отримують нагороди.</p>
+        </div>
+      </section>
+
+      <section id="ranks" style="margin-top:18px">
+        <div class="card">
+          <h3 style="margin:0 0 12px 0">Ранги та привілеї</h3>
+          <div class="ranks" id="ranksList">
+            <div class="rank"><h5>Нуб</h5><p class="muted">Стандартний гравець. Все безкоштовно.</p></div>
+            <div class="rank"><h5>RaidMate</h5><p class="muted">Початковий донат. Легкі косметичні бонуси.</p></div>
+            <div class="rank"><h5>Raider</h5><p class="muted">Переваги в економіці, скоріше відновлення спавна.</p></div>
+            <div class="rank"><h5>Grim</h5><p class="muted">Преміум‑ранг: більше привілеїв, унікальні набори та ранній доступ.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rules" style="margin-top:18px">
+        <div class="card">
+          <h3>Правила сервера</h3>
+          <ol style="margin-top:8px;color:var(--muted)">
+            <li>Заборонено використання читів та експлойтів.</li>
+            <li>Не ображай інших гравців — поважай спільноту.</li>
+            <li>Дроблення/сценарні групові напади без оголошення можуть каратися.</li>
+            <li>Донат не дає абсолютної переваги — лише зручності та косметику.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section style="margin-top:18px">
+        <div class="card">
+          <h3>Контакти та посилання</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+            <a class="btn" href="https://discord.gg/" target="_blank">Discord</a>
+            <a class="btn" href="https://t.me/" target="_blank">Telegram</a>
+            <a class="btn" href="#" id="forumLink">Форум</a>
+            <a class="btn" href="#" id="rulesLink">Повні правила</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>© <strong>GrimRaide</strong> — Проект у стилі ReallyWorld. IP: mc.grimraide.net • Порт: 25565</footer>
+  </div>
+
+  <!-- Modal (shop / donate) -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 style="margin:0">Магазин / Донат</h3>
+        <button class="btn" id="closeModal">Закрити</button>
+      </div>
+      <p class="muted small" style="margin-top:8px">Оберіть ранґ або пакет. Це приклад інтерфейсу — підключи платіжну систему (Stripe/WayForPay/Privat) на бекенді.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div style="background:var(--glass);padding:12px;border-radius:10px">
+          <h4 style="margin:0 0 8px 0">RaidMate — 75 грн</h4>
+          <p class="muted small">Косметика + базові бонуси.</p>
+          <div style="margin-top:8px"><button class="btn primary">Купити</button></div>
+        </div>
+        <div style="background:var(--glass);padding:12px;border-radius:10px">
+          <h4 style="margin:0 0 8px 0">Grim — 299 грн</h4>
+          <p class="muted small">Повний пакет: набори, привілеї, особливі хелпери.</p>
+          <div style="margin-top:8px"><button class="btn primary">Купити</button></div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <h4 style="margin:0">Підтримка</h4>
+        <p class="muted small">Проблеми з платежем — пиши в Telegram або Discord.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile bottom bar -->
+  <div class="mobile-bar">
+    <a class="btn primary" id="mobileJoin">Підключитись</a>
+    <a class="btn" id="mobileDonate">Донат</a>
+  </div>
+
+  <script>
+    // --- Simulated dynamic data (replace with real API calls / server-status endpoints) ---
+    const state = {
+      ip: 'mc.grimraide.net',
+      port: 25565,
+      players: Math.floor(Math.random()*40) + 2,
+      maxPlayers: 120,
+      ping: Math.floor(Math.random()*150)+20,
+      tps: (18 + Math.random()*2).toFixed(1),
+      uptimeDays: Math.floor(Math.random()*10),
+      news: [
+        'Великий вайп 1.0 — нові рейди та скарби!',
+        'Розіграш космічних наборів для донатерів кожного місяця.'
+      ]
+    }
+
+    function renderState(){
+      document.getElementById('players').innerText = state.players + ' / ' + state.maxPlayers;
+      document.getElementById('uptime').innerText = state.uptimeDays + ' днів';
+      document.getElementById('tps').innerText = state.tps;
+      document.getElementById('statusBig').innerText = (state.players>0? 'Online' : 'Offline');
+      document.getElementById('onlineMini').innerText = state.players;
+      document.getElementById('maxMini').innerText = state.maxPlayers;
+      document.getElementById('pingMini').innerText = state.ping + ' ms';
+
+      const newsList = document.getElementById('newsList'); newsList.innerHTML='';
+      state.news.forEach(n=>{ const li=document.createElement('li'); li.textContent = n; newsList.appendChild(li) });
+    }
+    renderState();
+
+    // Small interactions
+    const modal = document.getElementById('modal');
+    document.getElementById('donateBtn').addEventListener('click', ()=>{ modal.classList.add('show'); modal.setAttribute('aria-hidden', 'false') });
+    document.getElementById('closeModal').addEventListener('click', ()=>{ modal.classList.remove('show'); modal.setAttribute('aria-hidden', 'true') });
+    document.getElementById('mobileDonate').addEventListener('click', ()=>{ modal.classList.add('show'); modal.setAttribute('aria-hidden', 'false') });
+
+    // Connect buttons
+    function tryOpenMinecraft() {
+      // try mc:// protocol (works if user has a Minecraft launcher that registers it)
+      window.location.href = 'minecraft://?server=' + state.ip + ':' + state.port;
+      setTimeout(()=>{navigator.clipboard && navigator.clipboard.writeText(state.ip + ':' + state.port)},200);
+      alert('Скопіювано IP: ' + state.ip + ':' + state.port + '\nВідкрий Minecraft і встави IP, або натисни OK, щоб скопіювати автоматично.');
+    }
+    document.getElementById('joinNow').addEventListener('click', tryOpenMinecraft);
+    document.getElementById('mobileJoin').addEventListener('click', tryOpenMinecraft);
+    document.getElementById('connectBtn').addEventListener('click', ()=>{ tryOpenMinecraft(); });
+
+    // Links
+    document.getElementById('discordBtn').addEventListener('click', ()=>{ window.open('https://discord.gg/','_blank') });
+    document.getElementById('tgBtn').addEventListener('click', ()=>{ window.open('https://t.me/','_blank') });
+
+    // Fake live update for demo
+    setInterval(()=>{
+      if(Math.random() > 0.6){ state.players = Math.max(0, state.players + (Math.random()>0.5?1:-1)); }
+      state.ping = Math.floor(Math.random()*160)+20;
+      state.tps = (18 + Math.random()*2).toFixed(1);
+      renderState();
+    }, 5000);
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const href = a.getAttribute('href'); if(href === '#') return;
+        e.preventDefault(); document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
+      })
+    })
+
+    // Accessibility small tweak: close modal with ESC
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') { modal.classList.remove('show'); modal.setAttribute('aria-hidden','true') } })
+  </script>
 </body>
 </html>
