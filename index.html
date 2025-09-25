@@ -69,14 +69,17 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* SOCIAL BUTTONS */
-.social-buttons {
+/* SOCIAL BUTTONS ВНИЗ */
+.bottom-social {
     display: flex;
     justify-content: center;
     gap: 20px;
-    margin-bottom: 40px;
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    z-index: 10;
 }
-.social-buttons .btn {
+.bottom-social .btn {
     padding: 14px 28px;
     border-radius: 10px;
     border: none;
@@ -84,9 +87,9 @@ h1 {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.social-buttons .btn.telegram { background-color: #0088cc; color: #fff; }
-.social-buttons .btn.discord { background-color: #5865f2; color: #fff; }
-.social-buttons .btn:hover { opacity: 0.85; transform: scale(1.05); }
+.bottom-social .btn.telegram { background-color: #0088cc; color: #fff; }
+.bottom-social .btn.discord { background-color: #5865f2; color: #fff; }
+.bottom-social .btn:hover { opacity: 0.85; transform: scale(1.05); }
 
 /* ФУТЕР */
 footer {
@@ -117,34 +120,21 @@ footer {
     <p><b>Ласкаво просимо на GrimRaide</b><br>
     Гріф сервер, де ти зможеш позмагатися за владу, ресурси та славу серед інших гравців!
     На GrimRaide тебе чекає PvP, рейди, будівництво баз та виживання у відкритому світі. 
-        Тут кожна дія має значення: оборона свого дому, напад на ворогів, розвиток економіки та участь у великих подіях.
-     На сервері тебе очікують різноманітні івенти
-        Адмін івенти, тобто івенти офіційно проведенні від адмінів, де ти зможеш отримати унікальні речі
-        Сервер геть новий, тому залітай, очікуємо саме тебе!.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-  <!-- SOCIAL BUTTONS -->
-  <div class="social-buttons">
-    <button class="btn telegram">Telegram</button>
-    <button class="btn discord">Discord</button>
+    Тут кожна дія має значення: оборона свого дому, напад на ворогів, розвиток економіки та участь у великих подіях.
+    На сервері тебе очікують різноманітні івенти: адмінські івенти з унікальними призами. 
+    Сервер геть новий, тому залітай, очікуємо саме тебе!</p>
   </div>
 
   <!-- ФУТЕР -->
   <footer>
     © GrimRaide • Усі права захищені
   </footer>
+</div>
+
+<!-- SOCIAL BUTTONS ВНИЗ -->
+<div class="bottom-social">
+  <button class="btn telegram">Telegram</button>
+  <button class="btn discord">Discord</button>
 </div>
 
 </body>
