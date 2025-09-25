@@ -5,18 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GrimRaide</title>
 <style>
-/* --- Анімаційний фон --- */
+/* --- Анімаційний фон з хвилями --- */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(-45deg, #ff4ec7, #8c2eff, #ff4ec7, #8c2eff);
-    background-size: 400% 400%;
-    animation: gradientBG 20s ease infinite;
+    overflow-x: hidden;
+    background: #0a0a0a;
     color: #f2f2f2;
-    line-height: 1.6;
 }
 
-@keyframes gradientBG {
+body::before {
+    content:"";
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: linear-gradient(270deg, #ff4ec7, #8c2eff, #ff9cff, #ff4ec7);
+    background-size: 800% 800%;
+    z-index:-1;
+    animation: gradientMove 20s ease infinite;
+}
+
+@keyframes gradientMove {
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
@@ -30,21 +41,21 @@ body {
     padding: 20px 0;
 }
 
-/* --- ЛОГО ТЕКСТОМ З ГРАДІЄНТОМ --- */
+/* --- ЛОГО ТЕКСТОМ З РОЖЕВО-ФІОЛЕТОВИМ ГРАДІЄНТОМ --- */
 h1 {
     text-align: center;
-    font-size: 60px;
-    margin: 40px 0 20px 0;
+    font-size: 64px;
     font-weight: bold;
-    background: linear-gradient(90deg, #ff4ec7, #8c2eff);
+    background: linear-gradient(90deg, #ff4ec7, #8c2eff, #ff9cff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: glowText 2s ease-in-out infinite alternate;
+    margin: 40px 0 20px 0;
 }
 
 @keyframes glowText {
-    0% {text-shadow: 0 0 10px #ff4ec7, 0 0 20px #8c2eff;}
-    100% {text-shadow: 0 0 20px #ff4ec7, 0 0 40px #8c2eff;}
+    0% {text-shadow: 0 0 15px #ff4ec7, 0 0 30px #8c2eff, 0 0 45px #ff9cff;}
+    100% {text-shadow: 0 0 30px #ff4ec7, 0 0 60px #8c2eff, 0 0 90px #ff9cff;}
 }
 
 /* --- ГОЛОВНІ АНІМОВАНІ КНОПКИ --- */
@@ -67,7 +78,7 @@ h1 {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 .top-buttons .btn::before {
     content: "";
@@ -91,7 +102,7 @@ h1 {
 
 /* --- СЕКЦІЇ З РАМКАМИ --- */
 .section {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.55);
     border: 2px solid #ff4ec7;
     padding: 25px;
     border-radius: 15px;
