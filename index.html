@@ -5,35 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GrimRaide</title>
 <style>
-/* --- БАЗОВИЙ СТИЛЬ --- */
+/* --- Анімований фон --- */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
-    color: #1a1a1a;
+    background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #2b2b2b, #3a3a3a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #f2f2f2;
     line-height: 1.6;
 }
+@keyframes gradientBG {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* --- КОНТЕЙНЕР --- */
 .container {
     width: 90%;
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px 0;
 }
+
+/* --- ЛОГО ТЕКСТОМ --- */
 h1 {
     text-align: center;
     font-size: 48px;
     margin: 40px 0 20px 0;
     font-weight: bold;
-    color: #2b2b2b;
+    color: #ff4747;
 }
-h2 {
-    color: #2b2b2b;
-    margin-top: 25px;
-}
-p, ul {
-    margin-bottom: 15px;
-}
-ul { padding-left: 20px; }
 
 /* --- ГОЛОВНІ АНІМОВАНІ КНОПКИ --- */
 .top-buttons {
@@ -47,7 +50,7 @@ ul { padding-left: 20px; }
     background-color: #2b2b2b;
     color: #fff;
     padding: 12px 28px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 16px;
     font-weight: 600;
     border: none;
@@ -55,6 +58,7 @@ ul { padding-left: 20px; }
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 .top-buttons .btn::before {
     content: "";
@@ -73,17 +77,17 @@ ul { padding-left: 20px; }
 }
 .top-buttons .btn:hover {
     background-color: #1a1a1a;
+    transform: scale(1.05);
 }
 
-/* --- ІНФОРМАЦІЙНА РАМКА --- */
-.server-info {
-    background-color: #e0e0e0;
-    border: 1px solid #b0b0b0;
+/* --- СЕКЦІЇ З РАМКАМИ --- */
+.section {
+    background-color: rgba(0,0,0,0.6);
+    border: 2px solid #ff4747;
     padding: 20px;
-    border-radius: 10px;
-    margin: 30px 0;
+    border-radius: 12px;
+    margin-bottom: 30px;
 }
-.server-info p { margin: 8px 0; }
 
 /* --- СУЧАСНІ КНОПКИ TELEGRAM / DISCORD --- */
 .social-buttons {
@@ -94,26 +98,28 @@ ul { padding-left: 20px; }
     margin: 20px 0 40px 0;
 }
 .social-buttons .btn {
-    background-color: #2b7de9;
+    background-color: #3b82f6;
     color: #fff;
     padding: 12px 24px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 16px;
     font-weight: 600;
-    transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 .social-buttons .btn.discord { background-color: #5865f2; }
-.social-buttons .btn:hover { opacity: 0.85; }
+.social-buttons .btn:hover { opacity: 0.85; transform: scale(1.05); }
 
 /* --- ФУТЕР --- */
 footer {
-    background-color: #dcdcdc;
+    background-color: rgba(0,0,0,0.7);
     text-align: center;
     padding: 25px 10px;
     font-size: 14px;
-    color: #555;
+    color: #ccc;
+    border-top: 2px solid #ff4747;
 }
 
 /* --- АДАПТИВНІСТЬ --- */
@@ -137,7 +143,7 @@ footer {
 </div>
 
 <!-- КОНТЕНТ СЕРВЕРА -->
-<div class="container">
+<div class="container section">
 <p><b>Ласкаво просимо на GrimRaide</b><br>
 Сервер у стилі ReallyWorld — PvP, виживання, економіка та активна спільнота. Тут — вайпи, змагання, магазин привілеїв та регулярні івенти.</p>
 
@@ -145,13 +151,7 @@ footer {
 
 <p>Донат / Магазин | Правила | Останні новини | Скопіювати IP</p>
 
-<p>IP сервера: <i>видалено</i></p>
 <p>Питання по платежах — Telegram / Discord підтримка</p>
-
-<p><b>Версія:</b> 1.20.x</p>
-<p><b>Сервер:</b> GrimRaide</p>
-
-<p>Тут буде короткий опис та швидкі посилання.</p>
 
 <h2>Донат</h2>
 <p>Покращені ранги, набори та косметика</p>
@@ -188,15 +188,7 @@ footer {
 <p>Платіжні системи: WayForPay, LiqPay, PrivatBank — підключаєш бекенд для обробки.</p>
 </div>
 
-<!-- ІНФОРМАЦІЙНА РАМКА ПРО СЕРВЕР -->
-<div class="container server-info">
-<p><b>Сервер:</b> GrimRaide</p>
-<p><b>IP:</b> <i>видалено</i></p>
-<p><b>Порт:</b> 25565</p>
-<p><b>Версія:</b> 1.20.x</p>
-</div>
-
-<!-- КНОПКИ TELEGRAM / DISCORD -->
+<!-- СУЧАСНІ КНОПКИ TELEGRAM / DISCORD -->
 <div class="social-buttons">
 <button class="btn">Перейти в Telegram</button>
 <button class="btn discord">Перейти в Discord</button>
