@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GrimRaide</title>
 <style>
-/* --- Анімований фон --- */
+/* --- Анімаційний фон --- */
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #2b2b2b, #3a3a3a);
+    background: linear-gradient(-45deg, #ff4ec7, #8c2eff, #ff4ec7, #8c2eff);
     background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    animation: gradientBG 20s ease infinite;
     color: #f2f2f2;
     line-height: 1.6;
 }
+
 @keyframes gradientBG {
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
@@ -29,13 +30,21 @@ body {
     padding: 20px 0;
 }
 
-/* --- ЛОГО ТЕКСТОМ --- */
+/* --- ЛОГО ТЕКСТОМ З ГРАДІЄНТОМ --- */
 h1 {
     text-align: center;
-    font-size: 48px;
+    font-size: 60px;
     margin: 40px 0 20px 0;
     font-weight: bold;
-    color: #ff4747;
+    background: linear-gradient(90deg, #ff4ec7, #8c2eff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glowText 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowText {
+    0% {text-shadow: 0 0 10px #ff4ec7, 0 0 20px #8c2eff;}
+    100% {text-shadow: 0 0 20px #ff4ec7, 0 0 40px #8c2eff;}
 }
 
 /* --- ГОЛОВНІ АНІМОВАНІ КНОПКИ --- */
@@ -47,10 +56,10 @@ h1 {
     margin-bottom: 30px;
 }
 .top-buttons .btn {
-    background-color: #2b2b2b;
+    background-color: rgba(0,0,0,0.6);
     color: #fff;
-    padding: 12px 28px;
-    border-radius: 10px;
+    padding: 14px 30px;
+    border-radius: 12px;
     font-size: 16px;
     font-weight: 600;
     border: none;
@@ -58,7 +67,7 @@ h1 {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 .top-buttons .btn::before {
     content: "";
@@ -67,7 +76,7 @@ h1 {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.15);
     transform: rotate(45deg);
     transition: all 0.5s ease;
 }
@@ -76,17 +85,23 @@ h1 {
     left: 0;
 }
 .top-buttons .btn:hover {
-    background-color: #1a1a1a;
-    transform: scale(1.05);
+    background-color: rgba(0,0,0,0.8);
+    transform: scale(1.07);
 }
 
 /* --- СЕКЦІЇ З РАМКАМИ --- */
 .section {
-    background-color: rgba(0,0,0,0.6);
-    border: 2px solid #ff4747;
-    padding: 20px;
-    border-radius: 12px;
+    background-color: rgba(0,0,0,0.5);
+    border: 2px solid #ff4ec7;
+    padding: 25px;
+    border-radius: 15px;
     margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+.section:hover {
+    border-color: #8c2eff;
+    box-shadow: 0 0 30px rgba(255,78,199,0.7);
 }
 
 /* --- СУЧАСНІ КНОПКИ TELEGRAM / DISCORD --- */
@@ -98,35 +113,35 @@ h1 {
     margin: 20px 0 40px 0;
 }
 .social-buttons .btn {
-    background-color: #3b82f6;
+    background-color: #ff4ec7;
     color: #fff;
-    padding: 12px 24px;
-    border-radius: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
     font-size: 16px;
     font-weight: 600;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 .social-buttons .btn.discord { background-color: #5865f2; }
 .social-buttons .btn:hover { opacity: 0.85; transform: scale(1.05); }
 
 /* --- ФУТЕР --- */
 footer {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.6);
     text-align: center;
     padding: 25px 10px;
     font-size: 14px;
     color: #ccc;
-    border-top: 2px solid #ff4747;
+    border-top: 2px solid #ff4ec7;
 }
 
 /* --- АДАПТИВНІСТЬ --- */
 @media(max-width: 600px) {
     .top-buttons .btn { font-size: 14px; padding: 10px 20px; }
     .social-buttons .btn { font-size: 14px; padding: 10px 18px; }
-    h1 { font-size: 36px; }
+    h1 { font-size: 42px; }
 }
 </style>
 </head>
