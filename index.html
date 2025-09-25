@@ -5,138 +5,135 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GrimRaide</title>
 <style>
-  /* --- БАЗОВИЙ СТИЛЬ --- */
-  body {
+/* --- БАЗОВИЙ СТИЛЬ --- */
+body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-    color: #f2f2f2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #1a1a1a;
     line-height: 1.6;
-  }
-  a { text-decoration: none; color: inherit; }
-  h1, h2, h3 { margin: 0; }
-
-  /* --- ЛОГО --- */
-  .logo {
+}
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+h1 {
     text-align: center;
-    padding: 40px 20px 20px;
-  }
-  .logo img {
-    width: 250px;
-    max-width: 80%;
-  }
+    font-size: 48px;
+    margin: 40px 0 20px 0;
+    font-weight: bold;
+    color: #2b2b2b;
+}
+h2 {
+    color: #2b2b2b;
+    margin-top: 25px;
+}
+p, ul {
+    margin-bottom: 15px;
+}
+ul { padding-left: 20px; }
 
-  /* --- ГОЛОВНІ КНОПКИ ЗВЕРХУ --- */
-  .top-buttons {
+/* --- ГОЛОВНІ АНІМОВАНІ КНОПКИ --- */
+.top-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    margin: 20px 0;
-  }
-  .top-buttons .btn {
-    background: #ff4747;
+    margin-bottom: 30px;
+}
+.top-buttons .btn {
+    background-color: #2b2b2b;
     color: #fff;
-    padding: 14px 28px;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
     border: none;
+    cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-  }
-  .top-buttons .btn::before {
+}
+.top-buttons .btn::before {
     content: "";
     position: absolute;
-    left: -50%;
     top: -50%;
+    left: -50%;
     width: 200%;
     height: 200%;
     background: rgba(255,255,255,0.1);
     transform: rotate(45deg);
     transition: all 0.5s ease;
-  }
-  .top-buttons .btn:hover::before {
-    left: 0;
+}
+.top-buttons .btn:hover::before {
     top: 0;
-  }
-  .top-buttons .btn:hover {
-    background: #e63e3e;
-  }
+    left: 0;
+}
+.top-buttons .btn:hover {
+    background-color: #1a1a1a;
+}
 
-  /* --- КОНТЕЙНЕР З ТЕКСТОМ --- */
-  .container {
-    width: 90%;
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px 0;
-  }
-  .container p, .container ul {
-    margin-bottom: 15px;
-  }
-  ul { padding-left: 20px; }
-  h2 { color: #ff4747; margin-top: 25px; }
-
-  /* --- ІНФОРМАЦІЙНА РАМКА ПРО СЕРВЕР --- */
-  .server-info {
-    background: #1a1a1a;
-    border: 2px solid #ff4747;
+/* --- ІНФОРМАЦІЙНА РАМКА --- */
+.server-info {
+    background-color: #e0e0e0;
+    border: 1px solid #b0b0b0;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 10px;
     margin: 30px 0;
-  }
-  .server-info p { margin: 8px 0; }
+}
+.server-info p { margin: 8px 0; }
 
-  /* --- КНОПКИ TELEGRAM / DISCORD --- */
-  .social-buttons {
+/* --- СУЧАСНІ КНОПКИ TELEGRAM / DISCORD --- */
+.social-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
     margin: 20px 0 40px 0;
-  }
-  .social-buttons .btn {
-    background: #3b82f6;
+}
+.social-buttons .btn {
+    background-color: #2b7de9;
+    color: #fff;
     padding: 12px 24px;
-    border-radius: 12px;
+    border-radius: 8px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     transition: all 0.3s ease;
-  }
-  .social-buttons .btn.discord { background: #7289da; }
-  .social-buttons .btn:hover { opacity: 0.8; }
+    border: none;
+    cursor: pointer;
+}
+.social-buttons .btn.discord { background-color: #5865f2; }
+.social-buttons .btn:hover { opacity: 0.85; }
 
-  /* --- ФУТЕР --- */
-  footer {
-    background: #1a1a1a;
+/* --- ФУТЕР --- */
+footer {
+    background-color: #dcdcdc;
     text-align: center;
     padding: 25px 10px;
     font-size: 14px;
-    color: #999;
-  }
+    color: #555;
+}
 
-  /* --- АДАПТИВНІСТЬ --- */
-  @media(max-width: 600px) {
-    .top-buttons .btn { font-size: 16px; padding: 12px 20px; }
+/* --- АДАПТИВНІСТЬ --- */
+@media(max-width: 600px) {
+    .top-buttons .btn { font-size: 14px; padding: 10px 20px; }
     .social-buttons .btn { font-size: 14px; padding: 10px 18px; }
-  }
-
+    h1 { font-size: 36px; }
+}
 </style>
 </head>
 <body>
 
-<!-- ЛОГО -->
-<div class="logo">
-  <img src="https://via.placeholder.com/250x80?text=GrimRaide" alt="GrimRaide Logo">
-</div>
+<!-- ЛОГО ТЕКСТОМ -->
+<h1>GrimRaide</h1>
 
 <!-- ГОЛОВНІ АНІМОВАНІ КНОПКИ -->
 <div class="top-buttons">
-  <button class="btn">Донат</button>
-  <button class="btn">Новини</button>
-  <button class="btn">Як зайти</button>
+    <button class="btn">Донат</button>
+    <button class="btn">Новини</button>
+    <button class="btn">Як зайти</button>
 </div>
 
 <!-- КОНТЕНТ СЕРВЕРА -->
@@ -189,10 +186,9 @@
 <p>RaidMate 75 грн — косметика та бонуси <button class="btn">Купити</button></p>
 <p>Grim 299 грн — преміум пакет <button class="btn">Купити</button></p>
 <p>Платіжні системи: WayForPay, LiqPay, PrivatBank — підключаєш бекенд для обробки.</p>
-
 </div>
 
-<!-- ІНФОРМАЦІЙНА РАМКА -->
+<!-- ІНФОРМАЦІЙНА РАМКА ПРО СЕРВЕР -->
 <div class="container server-info">
 <p><b>Сервер:</b> GrimRaide</p>
 <p><b>IP:</b> <i>видалено</i></p>
@@ -200,10 +196,10 @@
 <p><b>Версія:</b> 1.20.x</p>
 </div>
 
-<!-- СУЧАСНІ КНОПКИ TELEGRAM / DISCORD -->
+<!-- КНОПКИ TELEGRAM / DISCORD -->
 <div class="social-buttons">
-<a href="#" class="btn">Перейти в Telegram</a>
-<a href="#" class="btn discord">Перейти в Discord</a>
+<button class="btn">Перейти в Telegram</button>
+<button class="btn discord">Перейти в Discord</button>
 </div>
 
 <!-- ФУТЕР -->
